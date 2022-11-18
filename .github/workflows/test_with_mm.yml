@@ -40,18 +40,18 @@ jobs:
       id: cache-mm
       uses: actions/cache@v3
       with:
-        path: micro-manager\MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
+        path: MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
         key: ${{ runner.os }}-mm-${MM_NIGHTLY_BUILD}-${{ matrix.python-version }}
 
     - name: Download MM
       if: steps.cache-mm.outputs.cache-hit != 'true'
       run: |
         curl -O https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
-
+        ls
       shell: bash
 
     - name: Install MM
-      run: micro-manager\MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
+      run: MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
 
     - name: Test
       run: pytest
