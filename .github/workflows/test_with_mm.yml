@@ -45,12 +45,14 @@ jobs:
 
     - name: Download MM
       if: steps.cache-mm.outputs.cache-hit != 'true'
-      run: |
+      run:
         curl -O https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
       shell: bash
 
     - name: Install MM
-      run: MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
+      run: |
+        ls
+        ./MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
       shell: bash
 
     - name: Test
