@@ -31,10 +31,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
 
-      - name: Install PM
-        run: |
-          pip install wheel
-          pip install ".[test]"
+    - name: Install PM
+      run: |
+        pip install wheel
+        pip install ".[test]"
 
     - name: Cache MM
       id: cache-mm
