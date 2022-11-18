@@ -45,7 +45,7 @@ jobs:
 
     - name: Download MM
       if: steps.cache-mm.outputs.cache-hit != 'true'
-      run: C:\msys64\usr\bin\wget.exe https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
+      run: wget https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
       shell: bash
 
     - name: Install MM
