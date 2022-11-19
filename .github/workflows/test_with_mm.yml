@@ -24,6 +24,22 @@ jobs:
         python-version: ['3.8', '3.9', '3.10']
 
     steps: 
+    - name: Cache MM
+      id: cache-mm
+      uses: actions/cache@v3
+      with:
+        path: mmsetup.exe
+        key: ${{ runner.os }}-mm-${MM_NIGHTLY_BUILD}-${{ matrix.python-version }}
+
+    - name: Download MM
+      if: steps.cache-mm.outputs.cache-hit != 'true'
+      run:
+        curl https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe -o mmsetup.exe
+      shell: bash
+
+    - name: Install MM
+      run: .\mmsetup.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
+
     - uses: actions/checkout@v3
 
     - uses: actions/setup-python@v4
@@ -35,25 +51,6 @@ jobs:
       run: |
         pip install wheel
         pip install ".[test]"
-
-    - name: Cache MM
-      id: cache-mm
-      uses: actions/cache@v3
-      with:
-        path: MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
-        key: ${{ runner.os }}-mm-${MM_NIGHTLY_BUILD}-${{ matrix.python-version }}
-
-    - name: Download MM
-      if: steps.cache-mm.outputs.cache-hit != 'true'
-      run:
-        curl -O https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
-      shell: bash
-
-    - name: Install MM
-      run: |
-        ls
-        ./MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
-      shell: bash
 
     - name: Test
       run: pytest
