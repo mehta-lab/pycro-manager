@@ -34,7 +34,7 @@ jobs:
     - name: Download MM
       if: steps.cache-mm.outputs.cache-hit != 'true'
       run: |
-          $mmuri = "https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe"
+          $mmuri = "https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_$Env:MM_NIGHTLY_BUILD.exe"
           aria2c -o mmsetup.exe $mmuri
 
     - name: Install MM
