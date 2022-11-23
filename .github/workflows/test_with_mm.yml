@@ -29,16 +29,18 @@ jobs:
       uses: actions/cache@v3
       with:
         path: mmsetup.exe
-        key: ${{ runner.os }}-mm-${MM_NIGHTLY_BUILD}-${{ matrix.python-version }}
+        key: ${{ runner.os }}-mm-${MM_NIGHTLY_BUILD}
 
     - name: Download MM
       if: steps.cache-mm.outputs.cache-hit != 'true'
       run:
-        curl https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe -o mmsetup.exe
+         C:\\msys64\\usr\\bin\\wget.exe https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe -O mmsetup.exe
       shell: bash
 
     - name: Install MM
-      run: .\mmsetup.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
+      run: |
+        ls .\mmsetup.exe
+        .\mmsetup.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
 
     - uses: actions/checkout@v3
 
