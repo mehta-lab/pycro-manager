@@ -40,7 +40,7 @@ jobs:
     - name: Install MM
       run: |
         ls .\mmsetup.exe
-        $innoSetupArgs = "/SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER /LOG=".\mmsetup.log""
+        $innoSetupArgs = "/SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER /LOG="mmsetup.log""
         Start-Process .\mmsetup.exe -ArgumentList $innoSetupArgs -Wait
         cat .\mmsetup.log
 
