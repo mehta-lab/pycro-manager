@@ -13,5 +13,7 @@ def enable_zmq():
         profile = json.load(f)
         profile["map"]["Preferences"]["scalar"]["org.micromanager.internal.MMStudio"][
             "scalar"
-        ]["run ZMQ server"]["scalar"] = True
+        ]["run ZQM server"][
+            "scalar"
+        ] = True  # TODO: "ZQM" is an upstream typo https://github.com/micro-manager/micro-manager/issues/1574
         json.dump(profile, f)
