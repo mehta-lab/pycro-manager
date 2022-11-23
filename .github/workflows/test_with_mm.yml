@@ -11,7 +11,7 @@ on: [pull_request]
     #   - closed
 
 env:
-  MM_NIGHTLY_BUILD: 2.0.1_20221117
+  MM_NIGHTLY_BUILD: 2.0.1_20221121
 
 jobs:
   test_with_mm:
@@ -33,9 +33,9 @@ jobs:
 
     - name: Download MM
       if: steps.cache-mm.outputs.cache-hit != 'true'
-      run:
-         C:\\msys64\\usr\\bin\\wget.exe https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe -O mmsetup.exe
-      shell: bash
+      run: |
+          $mmuri = https://download.micro-manager.org/nightly/2.0/Windows/MMSetup_64bit_${MM_NIGHTLY_BUILD}.exe
+          aria2c -o mmsetup.exe $mmuri
 
     - name: Install MM
       run: |
