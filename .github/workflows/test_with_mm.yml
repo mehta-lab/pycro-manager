@@ -40,7 +40,7 @@ jobs:
     - name: Install MM
       run: |
         ls .\mmsetup.exe
-        .\mmsetup.exe /SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER
+        Start-Process .\mmsetup.exe -ArgumentList "/SP /VERYSILENT /SUPRESSMSGBOXES /CURRENTUSER" -Wait
 
     - uses: actions/checkout@v3
 
