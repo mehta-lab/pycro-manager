@@ -4,8 +4,7 @@ import os
 from pycromanager import start_headless
 
 
-def test_start_headless(enable_zmq):
-    _ = enable_zmq
-    mm_app_path = "C:\Program Files\Micro-Manager-2.0"
+def test_start_headless():
+    mm_app_path = r"C:\Program Files\Micro-Manager-2.0"
     config_file = os.path.join(mm_app_path, "MMConfig_demo.cfg")
     start_headless(mm_app_path, config_file, timeout=5000)
